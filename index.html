@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Review Sentiment Analyzer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amazon+Ember:wght@400;500;700&family=Arial:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <h1>📦 Amazon Review Sentiment Analyzer</h1>
+                <p>Analyze the sentiment of Amazon product reviews instantly</p>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="analyzer-card">
+                <div class="input-section">
+                    <label for="reviewText" class="input-label">
+                        Enter Amazon Product Review:
+                    </label>
+                    <textarea 
+                        id="reviewText" 
+                        class="review-input" 
+                        placeholder="Paste your Amazon product review here... (e.g., 'This product exceeded my expectations! Great quality and fast shipping.')"
+                        rows="6"
+                    ></textarea>
+                    
+                    <button id="predictBtn" class="predict-button">
+                        <span class="button-text">🔍 Predict Sentiment</span>
+                        <div class="loading-spinner" id="loadingSpinner"></div>
+                    </button>
+                </div>
+
+                <div class="results-section" id="resultsSection">
+                    <h3 class="results-title">Analysis Results</h3>
+                    
+                    <div class="result-card sentiment-result">
+                        <div class="result-header">
+                            <span class="result-icon" id="sentimentIcon">🎯</span>
+                            <span class="result-label">Predicted Sentiment</span>
+                        </div>
+                        <div class="result-value" id="sentimentValue">-</div>
+                    </div>
+
+                    <div class="result-card confidence-result">
+                        <div class="result-header">
+                            <span class="result-icon">📊</span>
+                            <span class="result-label">Confidence Score</span>
+                        </div>
+                        <div class="result-value" id="confidenceValue">-</div>
+                        <div class="confidence-bar">
+                            <div class="confidence-fill" id="confidenceFill"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sample-reviews">
+                <h3>Try these sample reviews:</h3>
+                <div class="sample-buttons">
+                    <button class="sample-btn" data-review="This product is absolutely amazing! The quality is outstanding and it arrived faster than expected. Highly recommend to everyone!">
+                        Positive Sample
+                    </button>
+                    <button class="sample-btn" data-review="The product was okay, nothing special. It works as described but doesn't exceed expectations. Average quality for the price.">
+                        Neutral Sample
+                    </button>
+                    <button class="sample-btn" data-review="Terrible product! Poor quality, arrived damaged, and customer service was unhelpful. Complete waste of money. Do not buy!">
+                        Negative Sample
+                    </button>
+                </div>
+            </div>
+    </main>
+
+    <!-- Prediction History Section -->
+    <section class="history-section">
+        <div class="container">
+            <h2>Recent Predictions</h2>
+            <div class="history-controls">
+                <button id="refreshHistory" class="refresh-btn">
+                    <span class="refresh-icon">↻</span>
+                    Refresh History
+                </button>
+                <div class="history-stats">
+                    <span id="totalPredictions">Total: 0</span>
+                </div>
+            </div>
+            
+            <div class="history-table-container">
+                <table id="historyTable" class="history-table">
+                    <thead>
+                        <tr>
+                            <th>Review</th>
+                            <th>Sentiment</th>
+                            <th>Confidence</th>
+                            <th>Timestamp</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyTableBody">
+                        <tr class="no-data">
+                            <td colspan="4">No predictions yet. Submit a review to see history!</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id="historyLoading" class="history-loading" style="display: none;">
+                <div class="loading-spinner"></div>
+                <span>Loading prediction history...</span>
+            </div>
+            
+            <div id="historyError" class="history-error" style="display: none;">
+                <span class="error-icon">⚠️</span>
+                <span class="error-message">Failed to load prediction history</span>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+            <p>© 2024 Amazon Review Sentiment Analyzer - Powered by AI</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
